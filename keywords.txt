@@ -1,0 +1,9 @@
+RotaryBotton	KEYWORD1
+Rotary	KEYWORD2
+Botton	KEYWORD2
+setHandler	KEYWORD2
+loopOnce	KEYWORD2
+Direction	LITERAL1
+None	LITERAL1
+Left	LITERAL1
+Right	LITERAL1
