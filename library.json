@@ -5,7 +5,7 @@
 	"homepage": "https://github.com/yhfudev/ArduinoRotaryButton",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/yhfudev/ArduinoRotaryButton"
+		"url": "https://github.com/yhfudev/ArduinoRotaryButton.git"
 	},
 	"version": "1.0.0",
 	"authors": {
