@@ -9,6 +9,15 @@
 #ifndef ROTARY_BUTTON_H
 #define ROTARY_BUTTON_H 1
 
+// Arduino related
+#if defined(ARDUINO)
+
+#if ARDUINO >= 100
+#include <Arduino.h>
+#else
+#include <WProgram.h>
+#endif
+
 ////////////////////////////////////////////////////////////////////////////////
 class Rotary {
  public:
@@ -23,7 +32,7 @@ class Rotary {
     int pin1, pin2;
     int position;
     unsigned long last_read_ms;
-    byte state;
+    uint8_t state;
 
     Rotary::Callback change_cb = nullptr;
     void *userdata = nullptr;
@@ -44,7 +53,7 @@ class Button {
     typedef enum { None, Pressed, Released, Changed, Click, Tap, Long, Double, Triple } PressEvent;
     typedef void (*Callback) (void * user_data, Button::PressEvent type);
 
-    Button(byte attachTo, byte buttonMode = INPUT_PULLUP, unsigned int debounceTimeout = DEBOUNCE_MS)
+    Button(uint8_t attachTo, uint8_t buttonMode = INPUT_PULLUP, unsigned int debounceTimeout = DEBOUNCE_MS)
       : pin(attachTo) {
          setDebounceTime(debounceTimeout);
          pinMode(attachTo, buttonMode);
@@ -64,10 +73,10 @@ class Button {
     void loopOnce();
 
   private:
-    byte pin;
+    uint8_t pin;
     int prev_state;
     int state = HIGH;
-    byte click_count = 0;
+    uint8_t click_count = 0;
     unsigned int last_click_type = 0;
     unsigned long click_ms;
     unsigned long down_ms;
@@ -80,6 +89,8 @@ class Button {
     void *userdata = nullptr;
 
 };
+
+#endif // ARDUINO
 
 ////////////////////////////////////////////////////////////////////////////////
 #endif // ROTARY_BUTTON_H
