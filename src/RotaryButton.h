@@ -25,6 +25,9 @@ class Rotary {
     typedef void (*Callback) (void * user_data, Rotary::Direction change_type, int offset);
 
     Rotary(int pin1, int pin2);
+
+    void begin();
+
     void setHandler(void * user_data, Rotary::Callback f) {userdata = user_data; change_cb = f;}
     void loopOnce();
 
@@ -53,12 +56,11 @@ class Button {
     typedef enum { None, Pressed, Released, Changed, Click, Tap, Long, Double, Triple } PressEvent;
     typedef void (*Callback) (void * user_data, Button::PressEvent type);
 
-    Button(uint8_t attachTo, uint8_t buttonMode = INPUT_PULLUP, unsigned int debounceTimeout = DEBOUNCE_MS)
-      : pin(attachTo) {
-         setDebounceTime(debounceTimeout);
-         pinMode(attachTo, buttonMode);
-      }
-    void setDebounceTime(unsigned int ms) {debounce_time_ms = ms;}
+    Button(uint8_t attachTo) : pin(attachTo) {}
+    void begin() {
+         pinMode(this->pin, INPUT_PULLUP);
+    }
+    void setDebounceTime(unsigned int ms = DEBOUNCE_MS) {debounce_time_ms = ms;}
 
     void setHandler(void * user_data, Button::Callback f) {userdata = user_data; change_cb = f;}
 

@@ -9,15 +9,15 @@
 ////////////////////////////////////////////////////////////////////////////////
 #if defined(ARDUINO_ARCH_ESP8266)
 // ESP8266
-#define PIN_ROTARY_BTN D3
+#define PIN_ROTARY_BTN D6
 #define PIN_ROTARY_A   D5
 #define PIN_ROTARY_B   D7
 
 #elif defined(ARDUINO_ARCH_ESP32)
 // ESP32
-#define PIN_ROTARY_BTN 34
-#define PIN_ROTARY_A   35
-#define PIN_ROTARY_B   39
+#define PIN_ROTARY_BTN 0
+#define PIN_ROTARY_A   25
+#define PIN_ROTARY_B   26
 
 #elif defined(__AVR_ATmega2560__)
 // 2560, 12864 LCD, RepRapDiscount FULL GRAPHIC Smart Controller
@@ -62,11 +62,12 @@ void cb_rotary_position(void * user_data, Rotary::Direction change_type, int off
 ////////////////////////////////////////////////////////////////////////////////
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
   delay(50);
   Serial.println("\n\nSimple Rotary Demo");
 
   r.setHandler(&r, cb_rotary_position);
+  r.begin();
 }
 
 void loop() {

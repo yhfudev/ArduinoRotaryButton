@@ -15,7 +15,7 @@
 
 class Encoder {
 public:
-  Encoder(int pin_a, int pin_b, int pin_btn) : r(pin_a, pin_b), b(pin_btn), diff(0), btn(0) { setup(); }
+  Encoder(int pin_a, int pin_b, int pin_btn) : r(pin_a, pin_b), b(pin_btn), diff(0), btn(0) {}
 
   void add_diff(int df) { diff += df; }
   int get_diff() {
@@ -31,6 +31,13 @@ public:
     return ret;
   }
   int isPressed() { return b.isPressed(); }
+
+  void begin() {
+    r.setHandler(this, cb_rotary_position);
+    b.setHandler(this, cb_button_pressed);
+    r.begin();
+    b.begin();
+  }
 
   void loopOnce() {
     r.loopOnce();

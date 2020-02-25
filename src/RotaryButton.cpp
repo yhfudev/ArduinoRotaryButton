@@ -16,12 +16,13 @@ Rotary::Rotary(int pin1, int pin2) {
   this->pin1 = pin1;
   this->pin2 = pin2;
 
-  pinMode(pin1, INPUT_PULLUP);
-  pinMode(pin2, INPUT_PULLUP);
-
-  this->loopOnce();
   this->position = 0;
   this->last_read_ms = 0;
+}
+
+void Rotary::begin() {
+  pinMode(pin1, INPUT_PULLUP);
+  pinMode(pin2, INPUT_PULLUP);
 }
 
 #define MOVES_PER_TICK 2
